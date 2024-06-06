@@ -2,6 +2,25 @@
 @tailwind utilities;
 @tailwind components;
 
+* {
+  ::-webkit-scrollbar {
+    /* Customize the scrollbar width */
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    /* Customize the scrollbar track */
+    background-color: #445059;
+    border-radius: 0px 4px 4px 0px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    /* Customize the scrollbar thumb */
+    background-color: #7F7D7A;
+    border-radius: 4px;
+  }
+}
+
 body {
   overscroll-behavior-y: contain;
 }

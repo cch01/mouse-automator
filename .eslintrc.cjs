@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es2020: true, jest: true },
 
   ignorePatterns: ['dist', '.eslintrc.cjs', 'dist-electron'],
   parser: '@typescript-eslint/parser',

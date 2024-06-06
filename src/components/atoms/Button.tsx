@@ -3,7 +3,7 @@ import React, { memo } from 'react'
 
 interface ButtonProps {
   children: React.ReactNode | string
-  onClick: React.MouseEventHandler<HTMLButtonElement>
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
   isDisabled?: boolean
 }
 
