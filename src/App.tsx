@@ -70,14 +70,18 @@ function App() {
     , [filteredList, selectedProcesses])
 
   const onResetProcessStates = useCallback(() => {
-    !startedInterval && setSelectedProcesses(vals => {
-      vals.clear()
-      return new Map(vals)
-    })
+    if (!startedInterval) {
+      setProcessSpecific(false)
+      setSelectedProcesses(vals => {
+        vals.clear()
+        return new Map(vals)
+      })
+    }
 
     window.psList().then(setProcessList)
 
-  }, [setSelectedProcesses, startedInterval, setProcessList])
+
+  }, [setSelectedProcesses, startedInterval, setProcessList, setProcessSpecific])
 
   const onSelectMouseAction = useCallback((_label: string) => {
     const selectedAction = MOUSE_ACTION_OPTIONS.find(({ label }) => label === _label)
