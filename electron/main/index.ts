@@ -36,15 +36,18 @@ function createWindow() {
     webPreferences: {
       preload: path.join(MAIN_DIST, "./preload/index.mjs"),
     },
-    autoHideMenuBar:true,
-    resizable:false,
-    width:400,
-    height:800
+    autoHideMenuBar: true,
+    resizable: false,
+    width: 400,
+    height: 680,
   });
 
   // Test active push message to Renderer-process.
   win.webContents.on("did-finish-load", () => {
-    win?.webContents.send("main-process-message", `Finished Load on ${new Date().toLocaleString()}`);
+    win?.webContents.send(
+      "main-process-message",
+      `Finished Load on ${new Date().toLocaleString()}`
+    );
   });
 
   if (VITE_DEV_SERVER_URL) {
@@ -53,6 +56,37 @@ function createWindow() {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
+
+  // Disable all native keyboard shortcuts
+  win.webContents.on("before-input-event", (event, input) => {
+    const shortcutsToDisable = [
+      "Control+R", // Refresh
+      "Control+r", // Refresh
+      "F5", // Refresh
+      "Control+Shift+R", // Hard refresh
+      "Control+Shift+r", // Hard refresh
+      "Control+Shift+I", // Open DevTools
+      "Control+Shift+i", // Open DevTools
+      "F12", // Open DevTools
+      "Control+T", // New tab (if applicable)
+      "Control+t", // New tab (if applicable)
+      "Control+w", // Close tab/window
+      "Control+W", // Close tab/window
+      "Control+n", // New window
+      "Control+Shift++",
+      "Control+-",
+    ];
+
+    let keyboardInputs = "";
+    if (input.control) keyboardInputs += "Control+";
+    if (input.shift) keyboardInputs += "Shift+";
+    if (input.alt) keyboardInputs += "Alt+";
+    keyboardInputs += input.key;
+
+    if (shortcutsToDisable.includes(keyboardInputs)) {
+      event.preventDefault();
+    }
+  });
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -74,6 +108,5 @@ app.on("activate", () => {
 });
 
 app.whenReady().then(() => {
-
   createWindow();
 });

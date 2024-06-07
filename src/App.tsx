@@ -137,7 +137,7 @@ function App() {
           >
             <div className='flex flex-col gap-4 py-2'>
               <AutoComplete options={displayingProcessOptions} onSelect={onSelectProcess} onChange={setFilterKey} value={filterKey} />
-              {!!selectedProcesses.size && <div className='flex max-h-20 grow-0 flex-wrap gap-2 overflow-y-scroll'>
+              {!!selectedProcesses.size && <div className='flex max-h-[4.5rem] grow-0 flex-wrap gap-2 overflow-y-scroll'>
                 {[...selectedProcesses.values()].map(({ name, pid }, idx) => <Tag key={`${name}-${pid}-${idx}`} onClick={() => onRemoveProcess(pid)} title={`${pid} - ${name}`} />)}
               </div>}
             </div>
