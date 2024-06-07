@@ -18,10 +18,6 @@ function App() {
       ))
     , [filterKey, processList])
 
-  console.log(filteredList)
-
-  console.log('selectedProcesses', selectedProcesses.map(({ pid, name }) => name + pid))
-
   const onRemoveSelectedProcess = useCallback((selectedPid: number) => {
     setSelectedProcesses(vals => vals.filter(({ pid }) => pid !== selectedPid))
   }, [setSelectedProcesses])

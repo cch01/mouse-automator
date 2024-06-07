@@ -2,7 +2,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { Button } from "components/atoms/Button";
-import { memo, useCallback, useState } from "react";
+import { forwardRef,  useCallback, useState } from "react";
 
 export interface SearchInputProps {
 	value: string
@@ -13,7 +13,7 @@ export interface SearchInputProps {
 	hideSearchButton?: boolean
 }
 
-export const SearchInput = memo<SearchInputProps>(({ onChange, onSearch, value, onBlur, onFocus, hideSearchButton }) => {
+export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(({ onChange, onSearch, value, onBlur, onFocus, hideSearchButton }, ref) => {
 
 	const [focused, setFocused] = useState(false)
 
@@ -35,7 +35,16 @@ export const SearchInput = memo<SearchInputProps>(({ onChange, onSearch, value, 
 			<div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
 				<FontAwesomeIcon className={clsx('size-4', (focused || value) ? 'text-primary' : 'text-gray-500')} icon={faMagnifyingGlass} />
 			</div>
-			<input onFocus={_onFocus} onBlur={_onBlur} onChange={(e) => onChange(e.target.value)} value={value} type="search" id="search-input" className="block w-full rounded-lg border border-border bg-bg-secondary p-4 ps-10 text-sm text-primary placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-blue-500" placeholder="Search" required />
+			<input
+				ref={ref}
+				onFocus={_onFocus}
+				onBlur={_onBlur}
+				onChange={(e) => onChange(e.target.value)}
+				value={value}
+				type="search"
+				id="search-input"
+				className="block w-full rounded-lg border border-border bg-bg-secondary p-4 ps-10 text-sm text-primary placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-blue-500"
+				placeholder="Search" required />
 			<div hidden={hideSearchButton} className="absolute bottom-2.5 end-2.5">
 				<Button onClick={onSearch}>Search</Button>
 			</div>

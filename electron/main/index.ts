@@ -36,7 +36,7 @@ function createWindow() {
     webPreferences: {
       preload: path.join(MAIN_DIST, "./preload/index.mjs"),
     },
-    autoHideMenuBar:true,
+    // autoHideMenuBar:true,
     // resizable:false,
   });
 
