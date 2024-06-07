@@ -9,6 +9,7 @@ interface FormContainerProps {
   title: string
   children: React.ReactNode
   onClearSection?: (() => void) | false
+  clearButtonDisabled?: boolean
   showSwitch?: boolean
   onToggleSwitch?: (val?: boolean) => void
   toggleDisabled?: boolean
@@ -27,7 +28,8 @@ export const FormContainer: React.FC<FormContainerProps> = memo<FormContainerPro
   showSwitch,
   onToggleSwitch,
   switchValue,
-  toggleDisabled
+  toggleDisabled,
+  clearButtonDisabled
 }) => {
   const [currentIsCollapsed, setCurrentIsCollapsed] = useState(defaultCollapsed)
 
@@ -61,11 +63,11 @@ export const FormContainer: React.FC<FormContainerProps> = memo<FormContainerPro
           {onClearSection && (
             <div
               role="button"
-              className="flex size-6 cursor-pointer items-center justify-center"
+              className={clsx(clearButtonDisabled ? "cursor-not-allowed" : "cursor-pointer", "flex size-6 items-center justify-center")}
               onClick={onClearSection}
             >
               <FontAwesomeIcon
-                className="text-highlight"
+                className={clsx(clearButtonDisabled ? "text-tertiary" : "text-highlight")}
                 icon={faArrowRotateLeft}
               />
             </div>

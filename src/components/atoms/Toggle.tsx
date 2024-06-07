@@ -38,13 +38,14 @@ export const Toggle = memo<ToggleProps>(({
     'rtl:peer-checked:after:-translate-x-full',
     'dark:border-gray-600',
     'dark:bg-gray-700',
-    'dark:peer-focus:ring-blue-800'
+    'dark:peer-focus:ring-blue-800',
+    disabled && 'cursor-not-allowed'
   )
 
   return (
     <label
       role="button"
-      className="relative inline-flex cursor-pointer items-center"
+      className={clsx("relative inline-flex cursor-pointer items-center")}
     >
       <input
         onClick={() => disabled ? null : onToggle(!value)}

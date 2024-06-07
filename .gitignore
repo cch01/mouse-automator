@@ -13,6 +13,9 @@ dist-ssr
 dist-electron
 release
 *.local
+coverage
+.eslintcache
+
 
 # Editor directories and files
 .vscode/*

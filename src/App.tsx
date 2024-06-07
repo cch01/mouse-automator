@@ -59,10 +59,10 @@ function App() {
     const matchedProcess = filteredList.find(({ pid }) => pid.toString() === option.value)
     if (matchedProcess) setSelectedProcesses(vals => {
       vals.set(matchedProcess.pid, matchedProcess)
-      setProcessSpecific(true)
+      if (!startedInterval) setProcessSpecific(true)
       return new Map(vals)
     })
-  }, [setSelectedProcesses, filteredList, setProcessSpecific])
+  }, [setSelectedProcesses, filteredList, setProcessSpecific, startedInterval])
 
 
   const displayingProcessOptions = useMemo(() =>
@@ -128,6 +128,7 @@ function App() {
 
           <FormContainer
             onClearSection={onResetProcessStates}
+            clearButtonDisabled={!!startedInterval}
             title='Application'
             onToggleSwitch={() => setProcessSpecific(val => !val)}
             showSwitch
