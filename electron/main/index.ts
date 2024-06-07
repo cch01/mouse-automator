@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, Tray } from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { psListHandler } from "./icpHandlers/psLIst";
@@ -29,10 +29,11 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
   : RENDERER_DIST;
 
 let win: BrowserWindow | null;
+let tray: Tray | null;
 
 function createWindow() {
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC!, "electron-vite.svg"),
+    icon: path.join(process.env.VITE_PUBLIC!, "icon.png"),
     webPreferences: {
       preload: path.join(MAIN_DIST, "./preload/index.mjs"),
     },
@@ -109,4 +110,28 @@ app.on("activate", () => {
 
 app.whenReady().then(() => {
   createWindow();
+
+  tray = new Tray(path.join(process.env.VITE_PUBLIC!, "icon.png"));
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: "Show App",
+      click: () => {
+        win?.show();
+      },
+    },
+    {
+      label: "Quit",
+      click: () => {
+        app.quit();
+      },
+    },
+  ]);
+
+  tray.setToolTip("Mosue Automator");
+  tray.setContextMenu(contextMenu);
+
+  tray.on("click", () => {
+    win?.show();
+  });
 });

@@ -6,7 +6,7 @@ import { Tag } from 'components/atoms/Tag'
 import { TextInput } from 'components/atoms/TextInput'
 import { AutoComplete } from 'components/molecules/AutoComplete'
 import { Options } from 'components/molecules/inputs/Options'
-import banner from 'public/banner.jpg';
+import banner from '/banner.jpg';
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
