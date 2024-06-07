@@ -1,24 +1,33 @@
 import { faAngleUp, faArrowRotateLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import clsx from 'clsx'
-import { useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { Hr } from 'components/atoms/Hr'
+import { Toggle } from '../Toggle'
 
 interface FormContainerProps {
   title: string
   children: React.ReactNode
-  onClearSection?: () => void
+  onClearSection?: (() => void) | false
+  showSwitch?: boolean
+  onToggleSwitch?: (val?: boolean) => void
+  toggleDisabled?: boolean
+  switchValue?: boolean
   collapsible?: boolean
   defaultCollapsed?: boolean
   getIsCollapsed?: (val: boolean) => void
 }
-export const FormContainer: React.FC<FormContainerProps> = ({
+export const FormContainer: React.FC<FormContainerProps> = memo<FormContainerProps>(({
   title,
   onClearSection,
   children,
   collapsible,
   defaultCollapsed,
-  getIsCollapsed
+  getIsCollapsed,
+  showSwitch,
+  onToggleSwitch,
+  switchValue,
+  toggleDisabled
 }) => {
   const [currentIsCollapsed, setCurrentIsCollapsed] = useState(defaultCollapsed)
 
@@ -42,22 +51,35 @@ export const FormContainer: React.FC<FormContainerProps> = ({
     >
       <div className="flex w-full flex-row items-center justify-between">
         <div
-          className="cursor-pointer text-lg font-bold text-primary"
+          className={clsx(collapsible ? "cursor-pointer" : "", "text-lg font-bold text-primary")}
           onClick={(e) => (collapsible ? onToggleCollapse(e) : null)}
           role="heading"
         >
           {title}
         </div>
-        <div className="flex space-x-2">
+        <div className="mb-1 flex space-x-2">
           {onClearSection && (
             <div
               role="button"
-              className="flex size-6 items-center justify-center"
+              className="flex size-6 cursor-pointer items-center justify-center"
               onClick={onClearSection}
             >
               <FontAwesomeIcon
                 className="text-highlight"
                 icon={faArrowRotateLeft}
+              />
+            </div>
+          )}
+          {showSwitch && onToggleSwitch && (
+            <div
+              role="button"
+              className="flex cursor-pointer items-center justify-center"
+              onClick={() => !toggleDisabled && onToggleSwitch()}
+            >
+              <Toggle
+                onToggle={onToggleSwitch}
+                value={!!switchValue}
+                disabled={!!toggleDisabled}
               />
             </div>
           )}
@@ -86,12 +108,12 @@ export const FormContainer: React.FC<FormContainerProps> = ({
       />
       <div
         className={clsx(
-          'mb-2 transition-opacity',
+          'transition-opacity',
           currentIsCollapsed ? '-z-10 opacity-0' : 'opacity-100'
         )}
       >
         {children}
       </div>
-    </div>
+    </div >
   )
-}
+})

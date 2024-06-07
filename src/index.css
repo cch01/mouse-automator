@@ -19,18 +19,27 @@
     background-color: #7F7D7A;
     border-radius: 4px;
   }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield;
+  }
 }
 
 body {
-  overscroll-behavior-y: contain;
+  margin: 0;
+  height: 100vh;
+  user-select: none; 
 }
 
 :root {
-  @apply bg-bg-primary p-4;
+  @apply bg-bg-primary;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  overflow: auto;
+  overflow: hidden;
 }

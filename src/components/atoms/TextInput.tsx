@@ -1,14 +1,18 @@
 import { useEnterKey } from 'hooks/useEnterKey'
 import { useRef } from 'react'
+import { TextInputBase } from './TextInputBase'
 
 interface TextInputProps {
-	value?: string
-	onChange: (val: string) => void
+	value?: string | number
+	onChange: (val: string | number) => void
 	disabled?: boolean
 	description: string
+	suffix?: string
+	type?: React.HTMLInputTypeAttribute
+	step?: number
 }
 export const TextInput: React.FC<TextInputProps> = ({
-	onChange, disabled, value, description
+	onChange, disabled, value, description, suffix, step, type = 'text'
 }) => {
 
 	const inputRef = useRef<HTMLInputElement>(null)
@@ -18,15 +22,19 @@ export const TextInput: React.FC<TextInputProps> = ({
 	})
 
 	return (
-		<div className="flex flex-row items-center justify-between">
+		<div className="flex flex-col items-start justify-center gap-1">
 			<div className="text-base text-secondary">{description}</div>
-			<input
-				ref={inputRef}
-				value={value}
-				onChange={e => onChange(e.target.value)}
-				className="w-24 bg-bg-secondary text-right text-lg font-semibold text-primary"
-				disabled={disabled}
-			/>
+			<div className='relative flex w-fit'>
+				<TextInputBase
+					ref={inputRef}
+					onChange={onChange}
+					value={value?.toString() || ''}
+					type={type}
+					step={step}
+					disabled={disabled}
+				/>
+				<span className='absolute inset-y-0 right-2 inline-flex items-center text-secondary'>{suffix}</span>
+			</div>
 		</div>
 	)
 }

@@ -2,7 +2,8 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { Button } from "components/atoms/Button";
-import { forwardRef,  useCallback, useState } from "react";
+import { TextInputBase } from "components/atoms/TextInputBase";
+import { forwardRef, useCallback, useState } from "react";
 
 export interface SearchInputProps {
 	value: string
@@ -31,20 +32,22 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(({ onC
 	return <form onSubmit={onSearch}>
 		<label htmlFor="search-input"
 			className="sr-only mb-2 text-sm font-medium text-white">Search</label>
-		<div className="relative">
+		<div className="relative flex-row">
 			<div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
 				<FontAwesomeIcon className={clsx('size-4', (focused || value) ? 'text-primary' : 'text-gray-500')} icon={faMagnifyingGlass} />
 			</div>
-			<input
-				ref={ref}
-				onFocus={_onFocus}
-				onBlur={_onBlur}
-				onChange={(e) => onChange(e.target.value)}
-				value={value}
-				type="search"
-				id="search-input"
-				className="block w-full rounded-lg border border-border bg-bg-secondary p-4 ps-10 text-sm text-primary placeholder:text-gray-400 focus:border-primary focus:outline-none focus:ring-blue-500"
-				placeholder="Search" required />
+			<div className='flex'>
+				<TextInputBase
+					ref={ref}
+					onFocus={_onFocus}
+					onBlur={_onBlur}
+					onChange={onChange}
+					value={value}
+					placeholder="Search"
+					required
+					extendedClasses="ps-10"
+				/>
+			</div>
 			<div hidden={hideSearchButton} className="absolute bottom-2.5 end-2.5">
 				<Button onClick={onSearch}>Search</Button>
 			</div>

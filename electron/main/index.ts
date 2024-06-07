@@ -36,8 +36,10 @@ function createWindow() {
     webPreferences: {
       preload: path.join(MAIN_DIST, "./preload/index.mjs"),
     },
-    // autoHideMenuBar:true,
-    // resizable:false,
+    autoHideMenuBar:true,
+    resizable:false,
+    width:400,
+    height:800
   });
 
   // Test active push message to Renderer-process.

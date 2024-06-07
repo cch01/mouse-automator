@@ -1,8 +1,8 @@
 import { memo, useCallback, useRef, useState } from "react";
-import { SearchInput, SearchInputProps } from "../inputs/SearchInput";
-import { OptionItem } from "./OptionItem";
-import { OptionContainer } from "./OptionContainer";
 import { useClickOutside } from "hooks/useClickOutside";
+import { OptionContainer } from "components/atoms/OptionDropdown/OptionContainer";
+import { OptionItem } from "components/atoms/OptionDropdown/OptionItem";
+import { SearchInput, SearchInputProps } from "./inputs/SearchInput";
 
 interface AutoCompleteProps extends SearchInputProps {
 	options: { label: string, value: string }[]
@@ -21,7 +21,7 @@ export const AutoComplete = memo<AutoCompleteProps>(({ onChange, value, onSearch
 
 	useClickOutside(() => setShowResults(false), searchInputRef)
 
-	return <div>
+	return <div className='w-full'>
 		<SearchInput
 			ref={searchInputRef}
 			onSearch={_onSearch}

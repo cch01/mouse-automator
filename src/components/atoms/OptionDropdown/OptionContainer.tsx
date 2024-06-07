@@ -8,7 +8,7 @@ interface OptionContainerProps {
 
 export const OptionContainer = memo<OptionContainerProps>(({ children, show }) => {
 
-	const outerClasses = clsx(show ? 'border-border' : '', 'overflow-hidden rounded-md border border-solid  shadow-md')
+	const outerClasses = clsx(show ? 'border border-solid border-border' : '', 'overflow-hidden rounded-md shadow-md')
 
 	const innerClasses = clsx(show ? 'max-h-48' : 'max-h-0',
 		"overflow-y-auto  transition-all duration-300 ease-in-out"
