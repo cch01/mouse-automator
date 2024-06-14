@@ -24,6 +24,8 @@ export const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 export const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
 export const RENDERER_DIST = path.join(process.env.APP_ROOT, "dist");
 
+const isDev = !!VITE_DEV_SERVER_URL;
+
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
   ? path.join(process.env.APP_ROOT, "public")
   : RENDERER_DIST;
@@ -37,8 +39,8 @@ function createWindow() {
     webPreferences: {
       preload: path.join(MAIN_DIST, "./preload/index.mjs"),
     },
-    autoHideMenuBar: true,
-    resizable: false,
+    autoHideMenuBar: isDev,
+    resizable: isDev,
     width: 400,
     height: 680,
   });
@@ -64,10 +66,10 @@ function createWindow() {
       "Control+R", // Refresh
       "Control+r", // Refresh
       "F5", // Refresh
-      "Control+Shift+R", // Hard refresh
-      "Control+Shift+r", // Hard refresh
-      "Control+Shift+I", // Open DevTools
-      "Control+Shift+i", // Open DevTools
+      !isDev && "Control+Shift+R", // Hard refresh
+      !isDev && "Control+Shift+r", // Hard refresh
+      !isDev && "Control+Shift+I", // Open DevTools
+      !isDev && "Control+Shift+i", // Open DevTools
       "F12", // Open DevTools
       "Control+T", // New tab (if applicable)
       "Control+t", // New tab (if applicable)

@@ -33,7 +33,6 @@ export default {
 
 # Roadmap
 
-1. Toast notifications
-2. Windows tray icon
-3. Start up when login on Windows
-4. Auto Kill Application
+0. Enhance UI of select options
+1. Start up when login on Windows
+2. Auto Kill Application

@@ -23,13 +23,13 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(({ onC
 		setFocused(false)
 	}, [onBlur, setFocused])
 
-
 	const _onFocus: React.FocusEventHandler<HTMLInputElement> = useCallback((e) => {
 		onFocus?.(e)
 		setFocused(true)
 	}, [setFocused, onFocus])
 
-	return <form onSubmit={onSearch}>
+
+	return <div >
 		<label htmlFor="search-input"
 			className="sr-only mb-2 text-sm font-medium text-white">Search</label>
 		<div className="relative flex-row">
@@ -44,7 +44,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(({ onC
 					onChange={onChange}
 					value={value}
 					placeholder="Search"
-					required
+					required={false}
 					extendedClasses="ps-10"
 				/>
 			</div>
@@ -52,5 +52,5 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(({ onC
 				<Button onClick={onSearch}>Search</Button>
 			</div>
 		</div>
-	</form >
+	</div >
 })

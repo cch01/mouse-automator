@@ -48,7 +48,7 @@ export const Toggle = memo<ToggleProps>(({
       className={clsx("relative inline-flex cursor-pointer items-center")}
     >
       <input
-        onClick={() => disabled ? null : onToggle(!value)}
+        onChange={() => disabled ? null : onToggle(!value)}
         type="checkbox"
         checked={value}
         className="peer sr-only"
