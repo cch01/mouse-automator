@@ -6,14 +6,14 @@ import { Toggle } from '../Toggle'
 describe('Toggle', () => {
   it('renders properly when value=[true]', () => {
     const onToggle = vi.fn()
-    render(<Toggle onToggle={onToggle} value={true} />)
+    render(<Toggle onToggle={onToggle} checked={true} />)
     const toggleElement = screen.getByRole('checkbox')
     expect(toggleElement).toBeChecked()
   })
 
   it('renders properly when value=[false]', () => {
     const onToggle = vi.fn()
-    render(<Toggle onToggle={onToggle} value={false} />)
+    render(<Toggle onToggle={onToggle} checked={false} />)
     const toggleElement = screen.getByRole('checkbox')
     expect(toggleElement).not.toBeChecked()
   })
@@ -21,7 +21,7 @@ describe('Toggle', () => {
   it('can toggle', async () => {
     const user = userEvent.setup()
     const onToggle = vi.fn()
-    render(<Toggle onToggle={onToggle} value={false} />)
+    render(<Toggle onToggle={onToggle} checked={false} />)
     const toggleElement = screen.getByRole('checkbox')
     await user.click(toggleElement)
     expect(onToggle).toBeCalledWith(true)
@@ -30,7 +30,7 @@ describe('Toggle', () => {
   it('can not toggle when disabled', async () => {
     const user = userEvent.setup()
     const onToggle = vi.fn()
-    render(<Toggle disabled onToggle={onToggle} value={false} />)
+    render(<Toggle disabled onToggle={onToggle} checked={false} />)
     const toggleElement = screen.getByRole('checkbox')
     await user.click(toggleElement)
     expect(onToggle).toBeCalledTimes(0)

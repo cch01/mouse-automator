@@ -2,14 +2,14 @@ import clsx from 'clsx'
 import { memo } from 'react'
 
 interface ToggleProps {
-  onToggle: (val?: boolean) => void
-  value: boolean
+  onToggle: (val: boolean) => void
+  checked: boolean
   disabled?: boolean
 }
 
 export const Toggle = memo<ToggleProps>(({
   onToggle,
-  value,
+  checked,
   disabled
 }) => {
   const buttonClasses = clsx(
@@ -48,9 +48,9 @@ export const Toggle = memo<ToggleProps>(({
       className={clsx("relative inline-flex cursor-pointer items-center")}
     >
       <input
-        onChange={() => disabled ? null : onToggle(!value)}
+        onChange={() => disabled ? null : onToggle(!checked)}
         type="checkbox"
-        checked={value}
+        checked={checked}
         className="peer sr-only"
         disabled={disabled}
       />

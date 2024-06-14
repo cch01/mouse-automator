@@ -9,6 +9,7 @@ import { Options } from 'components/molecules/inputs/Options'
 import banner from '/banner.jpg';
 import { Bounce, ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { Toggle } from 'components/atoms/Toggle'
 
 const MOUSE_ACTION_OPTIONS = [{ label: 'Single Click', value: 'singleClick' }, { label: 'Double Click', value: 'doubleClick' }]
 const MOUSE_BUTTON_TYPE_OPTIONS = [{ label: 'Middle Click', value: 'middle' }, { label: 'Left Click', value: 'left' }, { label: 'Right Click', value: 'right' }]
@@ -26,6 +27,8 @@ function App() {
   const [selectedMouseAction, setSelectedMouseAction] = useState(MOUSE_ACTION_OPTIONS[0])
   const [selectedMouseButton, setSelectedMouseButton] = useState(MOUSE_BUTTON_TYPE_OPTIONS[0])
 
+  const [autoStart, setAutoStart] = useState(!!window.appStorage.get('autoStart'))
+
   const filteredList = useMemo(() =>
     processList.filter(({ name, pid }) =>
       [name, pid].some(key => key.toString().trim().toLowerCase().includes(filterKey.trim().toLowerCase())
@@ -38,7 +41,6 @@ function App() {
       return new Map(vals)
     })
   }, [setSelectedProcesses])
-
 
   const onStop = useCallback(() => {
     if (startedInterval) {
@@ -107,6 +109,12 @@ function App() {
     (!processSpecific || !startedInterval) && onRemoveSelectedProcess(pid)
   }, [processSpecific, startedInterval, onRemoveSelectedProcess])
 
+  const onToggleAutoStartup = useCallback((val: boolean) => {
+    window.appStorage.set('autoStart', val)
+    window.toggleAutoStart(val)
+    setAutoStart(val)
+  }, [setAutoStart])
+
   useEffect(() => {
     window.psList().then(setProcessList)
     setInterval(() => window.psList().then(newList => {
@@ -171,6 +179,22 @@ function App() {
                   <Options disabled={!!startedInterval} options={MOUSE_ACTION_OPTIONS} onSelect={onSelectMouseAction} selectedOption={selectedMouseAction} />
                   <Options disabled={!!startedInterval} options={MOUSE_BUTTON_TYPE_OPTIONS} onSelect={onSelectMouseButton} selectedOption={selectedMouseButton} />
                 </div>
+              </div>
+            </FormContainer>
+
+            <FormContainer title='Settings'>
+              <div className='flex flex-col gap-4 py-1'>
+                <div className='flex flex-row items-center gap-4'>
+                  <span className='text-secondary'>Start on login</span>
+                  <Toggle checked={autoStart} onToggle={onToggleAutoStartup}
+                  />
+                </div>
+
+                <div className='flex flex-row items-center gap-4'>
+                  <span className='text-secondary'>Apply selected process</span>
+                  <Toggle onToggle={() => null} checked />
+                </div>
+
               </div>
             </FormContainer>
 

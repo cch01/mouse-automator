@@ -1,10 +1,12 @@
-import { app, BrowserWindow, ipcMain, Menu, Tray } from "electron";
+import { app, BrowserWindow, ipcMain, Menu,  Tray } from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { psListHandler } from "./icpHandlers/psLIst";
 import { mouseClickHandler } from "./icpHandlers/robotJs";
-psListHandler(ipcMain);
-mouseClickHandler(ipcMain);
+import { appStorageHandler } from "./icpHandlers/appStorage";
+import { toggleAutoStartHandler } from "./icpHandlers/toggleAutoStart";
+
+const APP_HEIGHT = 680;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -38,11 +40,12 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC!, "icon.png"),
     webPreferences: {
       preload: path.join(MAIN_DIST, "./preload/index.mjs"),
+      devTools: isDev,
     },
-    autoHideMenuBar: isDev,
+    autoHideMenuBar: !isDev,
     resizable: isDev,
-    width: 400,
-    height: 680,
+    width: isDev ? 800 : 400,
+    height: APP_HEIGHT,
   });
 
   // Test active push message to Renderer-process.
@@ -60,6 +63,8 @@ function createWindow() {
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
 
+  win.webContents.setZoomFactor(0.8);
+
   // Disable all native keyboard shortcuts
   win.webContents.on("before-input-event", (event, input) => {
     const shortcutsToDisable = [
@@ -76,8 +81,8 @@ function createWindow() {
       "Control+w", // Close tab/window
       "Control+W", // Close tab/window
       "Control+n", // New window
-      "Control+Shift++",
-      "Control+-",
+      !isDev && "Control+Shift++",
+      !isDev && "Control+-",
     ];
 
     let keyboardInputs = "";
@@ -90,6 +95,8 @@ function createWindow() {
       event.preventDefault();
     }
   });
+
+  if (isDev) win.webContents.openDevTools();
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -137,3 +144,9 @@ app.whenReady().then(() => {
     win?.show();
   });
 });
+
+psListHandler(ipcMain);
+mouseClickHandler(ipcMain);
+appStorageHandler(ipcMain);
+toggleAutoStartHandler(ipcMain);
+

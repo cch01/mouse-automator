@@ -80,7 +80,7 @@ export const FormContainer: React.FC<FormContainerProps> = memo<FormContainerPro
             >
               <Toggle
                 onToggle={onToggleSwitch}
-                value={!!switchValue}
+                checked={!!switchValue}
                 disabled={!!toggleDisabled}
               />
             </div>

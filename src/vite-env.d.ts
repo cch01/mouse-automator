@@ -8,4 +8,6 @@ interface Window {
     actionType?: "singleClick" | "doubleClick",
     clickButton?: "left" | "right" | "middle"
   ) => Promise<void>;
+  toggleAutoStart: (enable: boolean) => void;
+  appStorage: import("electron-store").default;
 }

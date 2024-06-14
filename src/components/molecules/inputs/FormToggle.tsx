@@ -17,7 +17,7 @@ export const FormToggle: React.FC<FormToggleProps> = ({
   return (
     <div className="flex flex-row items-center justify-between">
       <div className="text-base text-secondary">{description}</div>
-      <Toggle disabled={disabled} onToggle={onToggle} value={value} />
+      <Toggle disabled={disabled} onToggle={onToggle} checked={value} />
     </div>
   )
 }
