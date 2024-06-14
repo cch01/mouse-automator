@@ -61,7 +61,7 @@ function App() {
 
     toast.success('Service Started')
 
-  }, [setStartedInterval, actionIntervalSecond, selectedMouseButton, selectedMouseAction, processSpecific])
+  }, [selectedProcesses.size, processSpecific, actionIntervalSecond, selectedMouseAction.value, selectedMouseButton.value])
 
   const onSelectProcess = useCallback((option: {
     label: string;
@@ -105,7 +105,6 @@ function App() {
 
   const onRemoveProcess = useCallback((pid: number) => {
     (!processSpecific || !startedInterval) && onRemoveSelectedProcess(pid)
-
   }, [processSpecific, startedInterval, onRemoveSelectedProcess])
 
   useEffect(() => {
@@ -123,18 +122,18 @@ function App() {
   useEffect(() => {
     if (!processSpecific) return
     const anySelectedProcessExist = !![...selectedProcesses.values()].find(({ pid }) => processList.find(({ pid: originalPid }) => originalPid === pid))
-    if (!anySelectedProcessExist) {
+    if (!anySelectedProcessExist && startedInterval) {
       toast.info('Service stopped due to target process not found')
       onStop()
     }
-  }, [processSpecific, processList, onStop, selectedProcesses])
+  }, [processSpecific, processList, onStop, selectedProcesses, startedInterval])
 
   return (
     <>
       <div className='flex h-screen flex-col'>
         <img draggable={false} className='w-screen' src={banner} />
 
-        <div className='flex grow flex-col justify-between gap-2 p-3' style={{ flex: 1 }}>
+        <div className='flex grow flex-col justify-between gap-2 p-3'>
 
           <div className='flex flex-col justify-between gap-2'>
 
