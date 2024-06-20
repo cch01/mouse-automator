@@ -126,7 +126,6 @@ function App() {
     }), 10000)
   }, [])
 
-
   useEffect(() => {
     if (!processSpecific) return
     const anySelectedProcessExist = !![...selectedProcesses.values()].find(({ pid }) => processList.find(({ pid: originalPid }) => originalPid === pid))
@@ -172,6 +171,7 @@ function App() {
                   step={5}
                   suffix='s'
                   disabled={!!startedInterval}
+                  min={0}
                 />
 
                 <div className='flex w-48 flex-col gap-2'>
@@ -190,10 +190,10 @@ function App() {
                   />
                 </div>
 
-                <div className='flex flex-row items-center gap-4'>
+                {/* <div className='flex flex-row items-center gap-4'>
                   <span className='text-secondary'>Apply selected process</span>
-                  <Toggle onToggle={() => null} checked />
-                </div>
+                  <Toggle onToggle={onToggleUseSavedProcess} checked={useSavedProcess} />
+                </div> */}
 
               </div>
             </FormContainer>

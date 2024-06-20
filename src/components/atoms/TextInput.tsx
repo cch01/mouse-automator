@@ -8,9 +8,10 @@ interface TextInputProps {
 	suffix?: string
 	type?: React.HTMLInputTypeAttribute
 	step?: number
+	min?: number
 }
 export const TextInput: React.FC<TextInputProps> = ({
-	onChange, disabled, value, description, suffix, step, type = 'text'
+	min, onChange, disabled, value, description, suffix, step, type = 'text'
 }) => {
 
 	return (
@@ -23,6 +24,7 @@ export const TextInput: React.FC<TextInputProps> = ({
 					type={type}
 					step={step}
 					disabled={disabled}
+					min={min}
 				/>
 				<span className='absolute inset-y-0 right-2 inline-flex items-center text-secondary'>{suffix}</span>
 			</div>

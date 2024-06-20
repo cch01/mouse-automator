@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu,  Tray } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, Tray } from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { psListHandler } from "./icpHandlers/psLIst";
@@ -63,8 +63,6 @@ function createWindow() {
     win.loadFile(path.join(RENDERER_DIST, "index.html"));
   }
 
-  win.webContents.setZoomFactor(0.8);
-
   // Disable all native keyboard shortcuts
   win.webContents.on("before-input-event", (event, input) => {
     const shortcutsToDisable = [
@@ -76,6 +74,7 @@ function createWindow() {
       !isDev && "Control+Shift+I", // Open DevTools
       !isDev && "Control+Shift+i", // Open DevTools
       "F12", // Open DevTools
+      "F11",
       "Control+T", // New tab (if applicable)
       "Control+t", // New tab (if applicable)
       "Control+w", // Close tab/window
@@ -97,6 +96,10 @@ function createWindow() {
   });
 
   if (isDev) win.webContents.openDevTools();
+
+  win.once("ready-to-show", () => {
+    win!.webContents.setZoomFactor(0.8);
+  });
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -149,4 +152,3 @@ psListHandler(ipcMain);
 mouseClickHandler(ipcMain);
 appStorageHandler(ipcMain);
 toggleAutoStartHandler(ipcMain);
-
