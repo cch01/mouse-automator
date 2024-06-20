@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
-import { useKeysCallbacks, Keys } from './useKeysCallbacks'; // Adjust the import path accordingly
+import { useKeysCallbacks, Keys } from '../useKeysCallbacks'; // Adjust the import path accordingly
 
 const TestComponent = ({
   onEnterPress,
