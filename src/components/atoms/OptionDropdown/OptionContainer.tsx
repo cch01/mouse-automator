@@ -11,7 +11,7 @@ export const OptionContainer = memo<OptionContainerProps>(({ children, show }) =
 	const outerClasses = clsx(show ? 'border border-solid border-border' : '', 'overflow-hidden rounded-md shadow-md')
 
 	const innerClasses = clsx(show ? 'max-h-48' : 'max-h-0',
-		"overflow-y-auto  transition-all duration-300 ease-in-out"
+		"overflow-y-auto transition-all duration-300 ease-in-out"
 	)
 
 	return <div className={outerClasses}>

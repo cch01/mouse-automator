@@ -2,6 +2,7 @@ import { memo, useCallback, useRef, useState } from "react";
 import { SearchInput, SearchInputProps } from "./inputs/SearchInput";
 import { OptionDropdown } from "components/atoms/OptionDropdown";
 import { Keys, useKeysCallbacks } from "hooks/useKeysCallbacks";
+import { useClickOutsideCallback } from "hooks/useClickOutsideCallback";
 
 interface AutoCompleteProps extends SearchInputProps {
 	options: { label: string, value: string }[]
@@ -13,6 +14,7 @@ export const AutoComplete = memo<AutoCompleteProps>(({ onChange, value, onSelect
 	const searchInputRef = useRef<HTMLInputElement>(null)
 	const [highlightedOptionIdx, setHighlightedOptionIdx] = useState(-1)
 	const [isFocused, setIsFocused] = useState(false)
+
 
 	useKeysCallbacks([
 		{ key: Keys.ARROW_UP, callback: () => isFocused && setHighlightedOptionIdx(val => Math.max(val - 1, 0)) },
@@ -40,7 +42,6 @@ export const AutoComplete = memo<AutoCompleteProps>(({ onChange, value, onSelect
 	}, [setIsFocused])
 
 	const onBlur = useCallback(() => {
-		setHighlightedOptionIdx(-1)
 		setIsFocused(false)
 	}, [setIsFocused])
 
@@ -48,6 +49,8 @@ export const AutoComplete = memo<AutoCompleteProps>(({ onChange, value, onSelect
 		onChange(val)
 		onFocus()
 	}, [onChange])
+
+	useClickOutsideCallback(() => setHighlightedOptionIdx(-1), searchInputRef)
 
 	return <div className='w-full'>
 		<SearchInput
