@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useCallback, useContext, useMemo, useState } from "react";
+import { PropsWithChildren, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 interface SystemSettingsContextProps {
 	autoStart: boolean
@@ -6,6 +6,8 @@ interface SystemSettingsContextProps {
 	startedInterval: NodeJS.Timeout | undefined
 	setStartedInterval: React.Dispatch<React.SetStateAction<NodeJS.Timeout | undefined>>
 	isAutomatorRunning: boolean
+	onToggleCloseToTray: (val: boolean) => void
+	closeToTray: boolean
 }
 
 const SystemSettingsContext = createContext<SystemSettingsContextProps>({} as SystemSettingsContextProps);
@@ -13,6 +15,8 @@ const SystemSettingsContext = createContext<SystemSettingsContextProps>({} as Sy
 export const SystemSettingsContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
 	const [autoStart, setAutoStart] = useState(!!window.appStorage.get('autoStart'))
+	const [closeToTray, setCloseToTray] = useState(!!window.appStorage.get('closeToTray'))
+
 	const [startedInterval, setStartedInterval] = useState<NodeJS.Timeout>()
 
 	const onToggleAutoStartup = useCallback((val: boolean) => {
@@ -21,9 +25,19 @@ export const SystemSettingsContextProvider: React.FC<PropsWithChildren> = ({ chi
 		setAutoStart(val)
 	}, [setAutoStart])
 
+	const onToggleCloseToTray = useCallback((val: boolean) => {
+		window.appStorage.set('closeToTray', val)
+		window.toggleCloseToTray(val)
+		setCloseToTray(val)
+	}, [setCloseToTray])
+
 	const isAutomatorRunning = useMemo(() => !!startedInterval, [startedInterval])
 
-	return <SystemSettingsContext.Provider value={{ isAutomatorRunning, autoStart, onToggleAutoStartup, startedInterval, setStartedInterval }}>
+	useEffect(() => {
+		onToggleCloseToTray(closeToTray)
+	}, [])
+
+	return <SystemSettingsContext.Provider value={{ onToggleCloseToTray, closeToTray, isAutomatorRunning, autoStart, onToggleAutoStartup, startedInterval, setStartedInterval }}>
 		{children}
 	</SystemSettingsContext.Provider>
 

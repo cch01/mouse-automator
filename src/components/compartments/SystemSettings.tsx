@@ -9,13 +9,19 @@ interface SystemSettingsProps {
 
 export const SystemSettings = memo<SystemSettingsProps>(() => {
 
-	const { autoStart, onToggleAutoStartup } = useSystemSettingsContext()
+	const { autoStart, closeToTray,  onToggleAutoStartup, onToggleCloseToTray } = useSystemSettingsContext()
 
 	return <FormContainer title='Settings'>
 		<div className='flex flex-col gap-4 py-1'>
 			<div className='flex flex-row items-center gap-4'>
 				<span className='text-secondary'>Start on login</span>
 				<Toggle checked={autoStart} onToggle={onToggleAutoStartup}
+				/>
+			</div>
+
+			<div className='flex flex-row items-center gap-4'>
+				<span className='text-secondary'>Close to tray</span>
+				<Toggle checked={closeToTray} onToggle={onToggleCloseToTray}
 				/>
 			</div>
 

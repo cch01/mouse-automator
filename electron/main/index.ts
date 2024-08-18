@@ -5,6 +5,7 @@ import { psListHandler } from "./icpHandlers/psLIst";
 import { mouseClickHandler } from "./icpHandlers/robotJs";
 import { appStorageHandler } from "./icpHandlers/appStorage";
 import { toggleAutoStartHandler } from "./icpHandlers/toggleAutoStart";
+import { exitBehaviorHandler } from "./icpHandlers/exitBehavior";
 
 const APP_HEIGHT = 680;
 
@@ -135,7 +136,7 @@ app.whenReady().then(() => {
     {
       label: "Quit",
       click: () => {
-        app.quit();
+        app.exit()
       },
     },
   ]);
@@ -146,9 +147,11 @@ app.whenReady().then(() => {
   tray.on("click", () => {
     win?.show();
   });
+
+  psListHandler(ipcMain);
+  mouseClickHandler(ipcMain);
+  appStorageHandler(ipcMain);
+  toggleAutoStartHandler(ipcMain);
+  exitBehaviorHandler(ipcMain, win!);
 });
 
-psListHandler(ipcMain);
-mouseClickHandler(ipcMain);
-appStorageHandler(ipcMain);
-toggleAutoStartHandler(ipcMain);

@@ -83,3 +83,7 @@ ipcRenderer.on('set-zoom-factor', (_event, zoomFactor) => {
   console.log("zoom factor", zoomFactor*0.5);
   webFrame.setZoomFactor(zoomFactor*0.5);
 });
+
+contextBridge.exposeInMainWorld("toggleCloseToTray", (enable: boolean) =>
+  ipcRenderer.invoke("toggle-close-to-tray", enable)
+);

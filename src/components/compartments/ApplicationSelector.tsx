@@ -37,7 +37,7 @@ export const ApplicationSelector = memo<ApplicationSelectorProps>(() => {
 		matchedProcesses.map(({ name, pid }) => ({ label: `${name} - ${pid}`, value: pid.toString() })).filter(({ value }) => !selectedProcesses.has(Number(value)))
 		, [matchedProcesses, selectedProcesses])
 
-	const onToggleProcessSpecific = useCallback(() => setProcessSpecific(val => !val), [])
+	const onToggleProcessSpecific = useCallback(() => setProcessSpecific(val => !val), [setProcessSpecific])
 
 	return <FormContainer
 		onClearSection={onReset}
