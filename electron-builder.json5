@@ -16,7 +16,7 @@
       "dmg"
     ],
     "artifactName": "${productName}-Mac-${version}-Installer.${ext}",
-    "icon": "./icon.png"
+    "icon": "assets/icon.icns"
   },
   "win": {
     "asar": false,
@@ -31,7 +31,7 @@
       }
     ],
     "artifactName": "${productName}-Windows-${version}-Setup.${ext}",
-    "icon": "./icon.png"
+    "icon": "assets/icon.icns"
   },
   "nsis": {
     "oneClick": false,
@@ -44,7 +44,7 @@
       "AppImage"
     ],
     "artifactName": "${productName}-Linux-${version}.${ext}",
-    "icon": "./icon.png"
+    "icon": "assets/icon.icns"
   }
   
 }
