@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu, Tray } from "electron";
+import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { psListHandler } from "./icpHandlers/psLIst";
@@ -124,7 +124,9 @@ app.on("activate", () => {
 app.whenReady().then(() => {
   createWindow();
 
-  tray = new Tray(path.join(process.env.VITE_PUBLIC!, "icon.png"));
+const trayImg = nativeImage.createFromPath(path.join(process.env.VITE_PUBLIC!, "icon.png"))
+
+  tray = new Tray(trayImg.resize({width: 16, height:16}));
 
   const contextMenu = Menu.buildFromTemplate([
     {
