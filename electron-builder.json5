@@ -20,7 +20,7 @@
     "icon": "./public/icon.icns"
   },
   "win": {
-    "asar": false,
+    "asar": true,
     "asarUnpack":["node_modules/ps-list"],
 
     "target": [
