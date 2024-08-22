@@ -11,4 +11,5 @@ interface Window {
   toggleAutoStart: (enable: boolean) => void;
   appStorage: import("electron-store").default;
   toggleCloseToTray: (enable: boolean) => void;
+  exit:() => void
 }

@@ -37,6 +37,11 @@ contextBridge.exposeInMainWorld("toggleAutoStart", (enable: boolean) =>
   ipcRenderer.invoke("toggle-auto-start", enable)
 );
 
+contextBridge.exposeInMainWorld("exit", () =>
+  ipcRenderer.invoke("exit")
+);
+
+
 contextBridge.exposeInMainWorld("appStorage", {
   get(key: string) {
     return ipcRenderer.sendSync("store-get", key);

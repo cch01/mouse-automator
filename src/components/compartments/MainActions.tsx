@@ -56,7 +56,7 @@ export const MainActions = memo<BottomActionsProps>(() => {
 			<Button isDisabled={isAutomatorRunning} onClick={onStart}>Start</Button>
 			<Button isDisabled={!isAutomatorRunning} onClick={onStop}>Stop</Button>
 		</div>
-		<Button onClick={window.close}>Exit</Button>
+		<Button onClick={window.exit}>Exit</Button>
 	</div>
 
 })
