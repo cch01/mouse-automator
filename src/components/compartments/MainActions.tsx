@@ -24,6 +24,7 @@ export const MainActions = memo<BottomActionsProps>(() => {
 			toast.info('Service Stopped');
 		}
 		setStartedInterval(undefined)
+		window.runStopServiceEffects()
 	}, [startedInterval, setStartedInterval])
 
 	const onStart = useCallback(() => {
@@ -34,7 +35,8 @@ export const MainActions = memo<BottomActionsProps>(() => {
 			window.mouseClick(mouseOptions.actionType, mouseOptions.clickButton)
 
 		}, mouseOptions.intervalSecond * 1000))
-
+		window.runStartServiceEffects()
+		
 		toast.success('Service Started')
 
 	}, [selectedProcesses.size, processSpecific, setStartedInterval, mouseOptions])

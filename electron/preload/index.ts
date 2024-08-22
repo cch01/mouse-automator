@@ -37,10 +37,7 @@ contextBridge.exposeInMainWorld("toggleAutoStart", (enable: boolean) =>
   ipcRenderer.invoke("toggle-auto-start", enable)
 );
 
-contextBridge.exposeInMainWorld("exit", () =>
-  ipcRenderer.invoke("exit")
-);
-
+contextBridge.exposeInMainWorld("exit", () => ipcRenderer.invoke("exit"));
 
 contextBridge.exposeInMainWorld("appStorage", {
   get(key: string) {
@@ -80,15 +77,21 @@ contextBridge.exposeInMainWorld("appStorage", {
   },
   getFullStore: () => ipcRenderer.sendSync("store-fullStore"),
   getStorePath: () => ipcRenderer.sendSync("store-storePath"),
-  getSize:() => ipcRenderer.sendSync("store-size"),
+  getSize: () => ipcRenderer.sendSync("store-size"),
 });
 
-
-ipcRenderer.on('set-zoom-factor', (_event, zoomFactor) => {
-  console.log("zoom factor", zoomFactor*0.5);
-  webFrame.setZoomFactor(zoomFactor*0.5);
+ipcRenderer.on("set-zoom-factor", (_event, zoomFactor) => {
+  webFrame.setZoomFactor(zoomFactor * 0.5);
 });
 
 contextBridge.exposeInMainWorld("toggleCloseToTray", (enable: boolean) =>
   ipcRenderer.invoke("toggle-close-to-tray", enable)
+);
+
+contextBridge.exposeInMainWorld("runStartServiceEffects", () =>
+  ipcRenderer.invoke("start-service-effects")
+);
+
+contextBridge.exposeInMainWorld("runStopServiceEffects", () =>
+  ipcRenderer.invoke("stop-service-effects")
 );

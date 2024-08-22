@@ -7,6 +7,7 @@ import { appStorageHandler } from "./icpHandlers/appStorage";
 import { toggleAutoStartHandler } from "./icpHandlers/toggleAutoStart";
 import { exitBehaviorHandler } from "./icpHandlers/exitBehavior";
 import { exitHandler } from "./icpHandlers/exit";
+import { startAndStopEffectsHandler } from "./icpHandlers/startAndStopEffects";
 
 const APP_HEIGHT = 680;
 
@@ -127,7 +128,7 @@ app.whenReady().then(() => {
 
 const trayImg = nativeImage.createFromPath(path.join(process.env.VITE_PUBLIC!, "icon.png"))
 
-  tray = new Tray(trayImg.resize({width: 16, height:16}));
+  tray = new Tray(trayImg.resize({width: 48, height:48}));
 
   const contextMenu = Menu.buildFromTemplate([
     {
@@ -157,5 +158,6 @@ const trayImg = nativeImage.createFromPath(path.join(process.env.VITE_PUBLIC!, "
   toggleAutoStartHandler(ipcMain);
   exitBehaviorHandler(ipcMain, win!);
   exitHandler(ipcMain)
+  startAndStopEffectsHandler(ipcMain, win!, tray)
 });
 
