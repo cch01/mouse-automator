@@ -1,3 +1,5 @@
+import defaultTheme from 'tailwindcss/defaultTheme'
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -5,7 +7,12 @@ export default {
     './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    fontFamily:{
+      'sans': ['lato', ...defaultTheme.fontFamily.sans], 
+     },   
+
+    extend: {
+    },
   },
   corePlugins: {
     preflight: false,
@@ -14,7 +21,7 @@ export default {
     // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
     require('tailwindcss-themer')({
       defaultTheme: {
-        extend: {
+        extend: {  
           colors: {
             'bg-primary': '#051622',
             'bg-secondary': '#1C2B36',

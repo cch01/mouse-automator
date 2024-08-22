@@ -4,16 +4,7 @@ const schema = {
   autoStart: {
     type: "boolean",
   },
-  savedProcesses: {
-    type: "array",
-    items: {
-      type: "string",
-    },
-    default: [],
-  },
-  useSavedProcess: {
-    type: "boolean",
-  },
+  closeToTray: { type: "boolean" }
 };
 
 export const store = new Store({ schema });

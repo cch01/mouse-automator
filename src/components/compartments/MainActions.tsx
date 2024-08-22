@@ -16,7 +16,7 @@ export const MainActions = memo<BottomActionsProps>(() => {
 
 	const { selectedProcesses, processSpecific, processList } = useProcessListContext()
 
-	const { selectedMouseAction, selectedMouseButton, actionIntervalSecond } = useMouseActionContext()
+	const { mouseOptions } = useMouseActionContext()
 
 	const onStop = useCallback(() => {
 		if (startedInterval) {
@@ -31,15 +31,13 @@ export const MainActions = memo<BottomActionsProps>(() => {
 		if (!selectedProcesses.size && processSpecific) return toast.error('Please select a process to start.')
 
 		setStartedInterval(setInterval(() => {
-			const actionType = selectedMouseAction.value as "singleClick" | "doubleClick"
-			const buttonType = selectedMouseButton.value as 'left' | "right" | "middle"
-			window.mouseClick(actionType, buttonType)
+			window.mouseClick(mouseOptions.actionType, mouseOptions.clickButton)
 
-		}, actionIntervalSecond * 1000))
+		}, mouseOptions.intervalSecond * 1000))
 
 		toast.success('Service Started')
 
-	}, [selectedProcesses.size, processSpecific, setStartedInterval, actionIntervalSecond, selectedMouseAction.value, selectedMouseButton.value])
+	}, [selectedProcesses.size, processSpecific, setStartedInterval, mouseOptions])
 
 	useEffect(() => {
 		if (!processSpecific) return

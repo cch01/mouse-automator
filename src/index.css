@@ -31,7 +31,7 @@
 body {
   margin: 0;
   height: 100vh;
-  user-select: none; 
+  user-select: none;
 }
 
 :root {
@@ -42,4 +42,45 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   overflow: hidden;
+}
+
+
+@layer base {
+
+  @font-face {
+    font-family: 'lato';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(/fonts/lato/lato-300.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'lato';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/lato/lato-400.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'lato';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/fonts/lato/lato-700.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'lato';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url(/fonts/lato/lato-900.woff2) format('woff2');
+  }
+
+
+  html {
+    font-family: "lato", system-ui, sans-serif;
+  }
 }

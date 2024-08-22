@@ -2,14 +2,16 @@ import { FormContainer } from "components/atoms/Form/FormContainer";
 import { Toggle } from "components/atoms/Toggle";
 import { useSystemSettingsContext } from "contexts/SystemSettingsContext";
 import { memo } from "react";
+import { getOs } from "utils/getOs";
 
-interface SystemSettingsProps {
+export const SystemSettings = memo(() => {
 
-}
-
-export const SystemSettings = memo<SystemSettingsProps>(() => {
-
-	const { autoStart, closeToTray,  onToggleAutoStartup, onToggleCloseToTray } = useSystemSettingsContext()
+	const {
+		autoStart,
+		closeToTray,
+		onToggleAutoStartup,
+		onToggleCloseToTray,
+	} = useSystemSettingsContext()
 
 	return <FormContainer title='Settings'>
 		<div className='flex flex-col gap-4 py-1'>
@@ -19,17 +21,11 @@ export const SystemSettings = memo<SystemSettingsProps>(() => {
 				/>
 			</div>
 
-			<div className='flex flex-row items-center gap-4'>
+			{getOs() !== 'MacOS' && <div className='flex flex-row items-center gap-4'>
 				<span className='text-secondary'>Close to tray</span>
 				<Toggle checked={closeToTray} onToggle={onToggleCloseToTray}
 				/>
-			</div>
-
-			{/* <div className='flex flex-row items-center gap-4'>
-<span className='text-secondary'>Apply selected process</span>
-<Toggle onToggle={onToggleUseSavedProcess} checked={useSavedProcess} />
-</div> */}
-
+			</div>}
 		</div>
 	</FormContainer>
 
