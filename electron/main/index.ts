@@ -1,4 +1,11 @@
-import { app, BrowserWindow, ipcMain, Menu, nativeImage, Tray } from "electron";
+import {
+  app,
+  BrowserWindow,
+  ipcMain,
+  Menu,
+  nativeImage,
+  Tray,
+} from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { psListHandler } from "./icpHandlers/psLIst";

@@ -4,6 +4,7 @@ import { useProcessListContext } from "contexts/ProcessListContext";
 import { useSystemSettingsContext } from "contexts/SystemSettingsContext";
 import { memo, useCallback, useEffect } from "react";
 import { toast } from "react-toastify";
+import { showSystemNotification } from "utils/showSystemNotification";
 
 
 
@@ -11,7 +12,7 @@ export const MainActions = memo(() => {
 
 	const { isAutomatorRunning, setStartedInterval, startedInterval } = useSystemSettingsContext()
 
-	const { selectedProcesses, processSpecific, processList } = useProcessListContext()
+	const { selectedProcesses, processSpecific, processList, setProcessSpecific } = useProcessListContext()
 
 	const { mouseOptions } = useMouseActionContext()
 
@@ -26,7 +27,11 @@ export const MainActions = memo(() => {
 
 	const onStart = useCallback(() => {
 
-		if (!selectedProcesses.size && processSpecific) return toast.error('Please select a process to start.')
+		if (!selectedProcesses.size && processSpecific) {
+			const errorMsg = 'Please select a process to start\nOr Click HERE to turn off application constrain.'
+			toast.error(errorMsg, {onClick:() => setProcessSpecific(false)})
+			throw errorMsg
+		}
 
 		setStartedInterval(setInterval(() => {
 			window.mouseClick(mouseOptions.actionType, mouseOptions.clickButton)
@@ -51,8 +56,20 @@ export const MainActions = memo(() => {
 		window.ipcRenderer.removeAllListeners('start-service')
 		window.ipcRenderer.removeAllListeners('stop-service')
 
-		window.ipcRenderer.on('start-service', onStart)
-		window.ipcRenderer.on('stop-service', onStop)
+		window.ipcRenderer.on('start-service', () => {
+			try {
+				onStart()
+				showSystemNotification({ title: 'Service Started', body: 'Go and grab a coffee ☕' })
+			} catch (errMsg) {
+				showSystemNotification({ title: 'Failed', body: errMsg + '😢', onClick:() => setProcessSpecific(false) })
+			}
+
+		})
+		window.ipcRenderer.on('stop-service', () => {
+			onStop()
+			showSystemNotification({ title: 'Service Stopped', body: 'Welcome back 😉' })
+		})
+
 	}, [onStop, onStart])
 
 
