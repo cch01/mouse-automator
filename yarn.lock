@@ -493,6 +493,14 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-2.0.3.tgz#4a2868d75d6d6963e423bcf90b7fd1be343409d3"
   integrity sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==
 
+"@hurdlegroup/robotjs@^0.12.2":
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/@hurdlegroup/robotjs/-/robotjs-0.12.2.tgz#685a0512185e3aa2559c9ad856830057769e8978"
+  integrity sha512-hv2qcNfKuMlctHLcGHWltHaxKPB4PMjqnsPNuNaHwrBYq6bwGodKyqCPTJFE918IJZoJuSTmMD1E+axQAe0ItQ==
+  dependencies:
+    node-addon-api "*"
+    node-gyp-build "^4.8.1"
+
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/@isaacs/cliui/-/cliui-8.0.2.tgz#b37667b7bc181c168782259bab42474fbf52b550"
@@ -584,14 +592,6 @@
     fs-extra "^9.0.0"
     lodash "^4.17.15"
     tmp-promise "^3.0.2"
-
-"@meadowsjared/robotjs@^0.6.26":
-  version "0.6.26"
-  resolved "https://registry.yarnpkg.com/@meadowsjared/robotjs/-/robotjs-0.6.26.tgz#05b2334d837319e4379f0b1ad9ec3fbdf08bd9b5"
-  integrity sha512-RFUlnz1AHEzekzqjGnE7BAHGIDDUFKvkX7IDfFXc1aGWPJJLkBaGmjmmOkj4qjW5/mBn5q8CRieCQyp9nc76iw==
-  dependencies:
-    node-addon-api "^8.1.0"
-    node-gyp-build "^4.8.1"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -4004,15 +4004,15 @@ neat-csv@^2.1.0:
     get-stream "^2.1.0"
     into-stream "^2.0.0"
 
+node-addon-api@*:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-8.1.0.tgz#55a573685dd4bd053f189cffa4e6332d2b1f1645"
+  integrity sha512-yBY+qqWSv3dWKGODD6OGE6GnTX7Q2r+4+DfpqxHSHh8x0B4EKP9+wVGLS6U/AM1vxSNNmUEuIV5EGhYwPpfOwQ==
+
 node-addon-api@^1.6.3:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-1.7.2.tgz#3df30b95720b53c24e59948b49532b662444f54d"
   integrity sha512-ibPK3iA+vaY1eEjESkQkM0BbCqFOaZMiXRTtdB0u7b4djtY6JnsjvPdUHVMg6xQt3B8fpTTWHI9A+ADjM9frzg==
-
-node-addon-api@^8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/node-addon-api/-/node-addon-api-8.1.0.tgz#55a573685dd4bd053f189cffa4e6332d2b1f1645"
-  integrity sha512-yBY+qqWSv3dWKGODD6OGE6GnTX7Q2r+4+DfpqxHSHh8x0B4EKP9+wVGLS6U/AM1vxSNNmUEuIV5EGhYwPpfOwQ==
 
 node-gyp-build@^4.8.1:
   version "4.8.1"

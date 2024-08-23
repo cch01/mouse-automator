@@ -1,7 +1,7 @@
 {
   "name": "mouse-automator",
   "private": true,
-  "version": "1.0.11",
+  "version": "1.0.12",
   "type": "module",
   "author": "Terry Chan",
   "description": "Mouse Automator is a lightweight, user-friendly desktop application designed to automate mouse clicks with ease. Whether you're gaming, testing software, or handling repetitive tasks, Mouse Automator has you covered!",
@@ -20,7 +20,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@meadowsjared/robotjs": "^0.6.26",
+    "@hurdlegroup/robotjs": "^0.12.2",
     "@tanstack/react-query": "^5.45.1",
     "@trufflesuite/ps-list": "^0.0.3",
     "electron-store": "^9.0.0",
