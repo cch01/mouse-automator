@@ -13,9 +13,12 @@
     "dist-electron"
   ],
   "mac": {
-    "target": [
-      "dmg"
-    ],
+    "target": [{
+      "target": "dmg",
+      "arch": [
+        "universal"
+      ]
+    }],
     "artifactName": "${productName}-Mac-${version}-Installer.${ext}",
     "icon": "./public/icon.icns"
   },
