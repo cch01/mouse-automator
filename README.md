@@ -18,7 +18,7 @@ This application is built with:
 - **[TailwindCSS](https://tailwindcss.com/)**: For sleek and responsive UI design.
 - **[Vite](https://vitejs.dev/)**: For a fast and efficient development environment.
 - **[ps-list](https://www.npmjs.com/package/@trufflesuite/ps-list)**: For fetching and managing processes running on your system.
-- **[@meadowsjared/robotjs](https://www.npmjs.com/package/@meadowsjared/robotjs)**: For simulating mouse clicks and keyboard inputs.
+- **[nut.js](https://nutjs.dev/docs/getting-started)**: For simulating mouse clicks and keyboard inputs.
 
 
 ## ✨ Features
@@ -68,13 +68,14 @@ This application is built with:
 
 ## 🛣️Feature Roadmap
 
-1. 💀 Auto Kill Application
-2. ⌨️ Hotkey Activation
-3. 🛑 Stop After `timer | count of clicks | until stopped`
-4. 🌠 Click at desired screen coordinates
-5. 🗃️ Multiple Profiles save/load
-6. 🌟 Click Feedback
-7. 🤖 Advanced Macro Editor (Action Timeline, Action Editor)
+1. 🎯 Search Windows by Title & click at targeted window
+2. 💀 Auto Kill Application
+3. ⌨️ Hotkey Activation
+4. 🛑 Stop After `timer | count of clicks | until stopped`
+5. 🌠 Click at desired screen coordinates
+6. 🗃️ Multiple Profiles save/load
+7. 🌟 Click Feedback
+8. 🤖 Advanced Macro Editor (Action Timeline, Action Editor)
 
 
 
