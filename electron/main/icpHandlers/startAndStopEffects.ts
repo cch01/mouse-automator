@@ -1,11 +1,12 @@
 import { ipcMain } from "electron/main";
-import { app, BrowserWindow, nativeImage, Tray } from "electron";
+import { app, BrowserWindow, Menu, nativeImage, Tray } from "electron";
 import path from "node:path";
 
 export const startAndStopEffectsHandler = (
   _ipcMain: typeof ipcMain,
   win: BrowserWindow,
-  tray: Tray
+  tray: Tray,
+  contextMenu: Menu
 ) => {
   const STOP_ICON = nativeImage.createFromPath(
     path.join(process.env.VITE_PUBLIC!, "icon.png")
@@ -31,6 +32,14 @@ export const startAndStopEffectsHandler = (
     tray.setImage(START_TRAY_ICON);
     win.setOverlayIcon(WORKING_OVERLAY_ICON, "Working");
     win.setTitle("Mouse Animator - Working");
+
+    const startBtnMenu = contextMenu.items.find(({label})=>label ==='Start')!
+    startBtnMenu.enabled = false;
+    const stopBtn = startBtnMenu.menu.items.find(
+      ({ label }) => label === "Stop"
+    );
+    if (stopBtn) stopBtn.enabled = true;
+
   });
 
   _ipcMain.handle("stop-service-effects", async () => {
@@ -40,5 +49,13 @@ export const startAndStopEffectsHandler = (
     win.setOverlayIcon(START_ICON, "Started");
     win.setTitle("Mouse Animator");
     win.setOverlayIcon(null, "");
+
+    const stopBtnMenu = contextMenu.items.find(({label})=>label ==='Stop')!
+    stopBtnMenu.enabled = false;
+    const startBtn = stopBtnMenu.menu.items.find(
+      ({ label }) => label === "Start"
+    );
+    if (startBtn) startBtn.enabled = true;
+
   });
 };

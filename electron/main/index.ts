@@ -126,22 +126,29 @@ app.on("activate", () => {
 app.whenReady().then(() => {
   createWindow();
 
-const trayImg = nativeImage.createFromPath(path.join(process.env.VITE_PUBLIC!, "icon.png"))
+  const trayImg = nativeImage.createFromPath(
+    path.join(process.env.VITE_PUBLIC!, "icon.png")
+  );
 
-  tray = new Tray(trayImg.resize({width: 48, height:48}));
+  tray = new Tray(trayImg.resize({ width: 48, height: 48 }));
 
   const contextMenu = Menu.buildFromTemplate([
     {
       label: "Show App",
-      click: () => {
-        win?.show();
-      },
+      click: () => win?.show(),
+    },
+    {
+      label: "Start",
+      click: () => win?.webContents.send("start-service"),
+    },
+    {
+      label: "Stop",
+      click: () => win?.webContents.send("stop-service"),
+      enabled: false,
     },
     {
       label: "Quit",
-      click: () => {
-        app.exit()
-      },
+      click: () => app.exit(),
     },
   ]);
 
@@ -157,7 +164,6 @@ const trayImg = nativeImage.createFromPath(path.join(process.env.VITE_PUBLIC!, "
   appStorageHandler(ipcMain);
   toggleAutoStartHandler(ipcMain);
   exitBehaviorHandler(ipcMain, win!);
-  exitHandler(ipcMain)
-  startAndStopEffectsHandler(ipcMain, win!, tray)
+  exitHandler(ipcMain);
+  startAndStopEffectsHandler(ipcMain, win!, tray, contextMenu);
 });
-

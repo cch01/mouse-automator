@@ -6,11 +6,8 @@ import { memo, useCallback, useEffect } from "react";
 import { toast } from "react-toastify";
 
 
-interface BottomActionsProps {
 
-}
-
-export const MainActions = memo<BottomActionsProps>(() => {
+export const MainActions = memo(() => {
 
 	const { isAutomatorRunning, setStartedInterval, startedInterval } = useSystemSettingsContext()
 
@@ -36,7 +33,7 @@ export const MainActions = memo<BottomActionsProps>(() => {
 
 		}, mouseOptions.intervalSecond * 1000))
 		window.runStartServiceEffects()
-		
+
 		toast.success('Service Started')
 
 	}, [selectedProcesses.size, processSpecific, setStartedInterval, mouseOptions])
@@ -49,6 +46,14 @@ export const MainActions = memo<BottomActionsProps>(() => {
 			onStop()
 		}
 	}, [processSpecific, processList, onStop, selectedProcesses, startedInterval])
+
+	useEffect(() => {
+		window.ipcRenderer.removeAllListeners('start-service')
+		window.ipcRenderer.removeAllListeners('stop-service')
+
+		window.ipcRenderer.on('start-service', onStart)
+		window.ipcRenderer.on('stop-service', onStop)
+	}, [onStop, onStart])
 
 
 	return <div className='flex justify-between'>
