@@ -2,7 +2,6 @@ import { FormContainer } from "components/atoms/Form/FormContainer";
 import { Toggle } from "components/atoms/Toggle";
 import { useSystemSettingsContext } from "contexts/SystemSettingsContext";
 import { memo } from "react";
-import { getOs } from "utils/getOs";
 
 export const SystemSettings = memo(() => {
 
@@ -21,11 +20,11 @@ export const SystemSettings = memo(() => {
 				/>
 			</div>
 
-			{getOs() !== 'MacOS' && <div className='flex flex-row items-center gap-4'>
+			<div className='flex flex-row items-center gap-4'>
 				<span className='text-secondary'>Close to tray</span>
 				<Toggle checked={closeToTray} onToggle={onToggleCloseToTray}
 				/>
-			</div>}
+			</div>
 		</div>
 	</FormContainer>
 

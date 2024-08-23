@@ -137,7 +137,7 @@ app.whenReady().then(() => {
     path.join(process.env.VITE_PUBLIC!, "icon.png")
   );
 
-  tray = new Tray(trayImg.resize({ width: 48, height: 48 }));
+  tray = new Tray(trayImg.resize({ width: 24, height: 24 }));
 
   const contextMenu = Menu.buildFromTemplate([
     {

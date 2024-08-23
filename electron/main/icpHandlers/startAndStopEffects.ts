@@ -21,10 +21,10 @@ export const startAndStopEffectsHandler = (
 
   const STOP_TRAY_ICON = nativeImage
     .createFromPath(path.join(process.env.VITE_PUBLIC!, "icon.png"))
-    .resize({ width: 48, height: 48 });
+    .resize({ width: 24, height: 24 });
   const START_TRAY_ICON = nativeImage
     .createFromPath(path.join(process.env.VITE_PUBLIC!, "icon_working.png"))
-    .resize({ width: 48, height: 48 });
+    .resize({ width: 24, height: 24 });
 
   _ipcMain.handle("start-service-effects", async () => {
     win.setIcon(START_ICON);
