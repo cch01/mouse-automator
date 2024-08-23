@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { getOs } from "./getOs";
 
 type SystemNotificationInput = {
   title: string;
@@ -25,7 +26,7 @@ export const showSystemNotification = ({
 
   const notif = new Notification(title, {
     body,
-    icon,
+    icon:getOs() === 'MacOS' ? undefined:icon,
   });
 
   if (onClick) notif.onclick = onClick;
