@@ -35,7 +35,7 @@ This application is built with:
 
 ### ⚙️ General Settings
 - **🚀 Start on Login**: Run the application automatically when your system starts.
-- **🗂️ Close to Tray(Windows only)**: Minimize the application to the system tray for easy access.
+- **🗂️ Close to Tray**: Minimize the application to the system tray for easy access.
 
 ### 🕹️ Control Panel
 - **▶️ Start / ⏹️ Stop**: Begin or end the automated clicking process with a single click.
