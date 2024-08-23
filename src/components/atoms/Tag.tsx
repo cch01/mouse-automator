@@ -14,3 +14,5 @@ export const Tag: React.FC<TagProps> = memo<TagProps>(({ onClick, title }) => <>
 	</span>
 </>
 )
+
+Tag.displayName='Tag'

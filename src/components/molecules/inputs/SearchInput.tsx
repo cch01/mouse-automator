@@ -54,3 +54,6 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(({ onC
 		</div>
 	</div >
 })
+
+SearchInput.displayName = 'SearchInput'
+

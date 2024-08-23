@@ -1,5 +1,5 @@
 import { ipcMain } from "electron/main";
-import robotJs from "@jitsi/robotjs";
+import robotJs from "@meadowsjared/robotjs";
 
 export const mouseClickHandler = (_ipcMain: typeof ipcMain) => {
   _ipcMain.handle(

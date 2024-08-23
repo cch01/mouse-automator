@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { ProcessDescriptor } from "ps-list";
+import { ProcessDescriptor } from "@trufflesuite/ps-list";
 import { PropsWithChildren, createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 interface ProcessLIstContextProps {

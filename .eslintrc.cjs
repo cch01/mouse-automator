@@ -17,6 +17,8 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:tailwindcss/recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime'
       ],
   rules: {
     'react-refresh/only-export-components': [

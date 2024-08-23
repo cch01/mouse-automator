@@ -25,3 +25,5 @@ export const OptionDropdown = memo<OptionDropdownProps>(({ options, onSelect, ex
 	</OptionContainer>
 
 })
+
+OptionDropdown.displayName = 'OptionDropdown'

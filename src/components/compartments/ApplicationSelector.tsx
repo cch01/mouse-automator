@@ -11,7 +11,6 @@ interface ApplicationSelectorProps {
 
 export const ApplicationSelector = memo<ApplicationSelectorProps>(() => {
 
-
 	const {
 		filterKey,
 		matchedProcesses,
@@ -57,3 +56,6 @@ export const ApplicationSelector = memo<ApplicationSelectorProps>(() => {
 	</FormContainer >
 
 })
+
+
+ApplicationSelector.displayName='ApplicationSelector'

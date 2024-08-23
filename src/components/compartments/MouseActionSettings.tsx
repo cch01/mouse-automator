@@ -55,3 +55,5 @@ export const MouseActionSettings = memo<MouseActionSettingsProps>(() => {
 	</FormContainer>
 
 })
+
+MouseActionSettings.displayName = 'MouseActionSettings'

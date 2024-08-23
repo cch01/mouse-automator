@@ -23,9 +23,6 @@
     "icon": "./public/icon.icns"
   },
   "win": {
-    "asar": true,
-    "asarUnpack":["node_modules/ps-list"],
-
     "target": [
       {
         "target": "nsis",

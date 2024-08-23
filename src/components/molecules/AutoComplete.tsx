@@ -69,3 +69,5 @@ export const AutoComplete = memo<AutoCompleteProps>(({ onChange, value, onSelect
 		/>
 	</div>
 })
+
+AutoComplete.displayName = 'AutoComplete'

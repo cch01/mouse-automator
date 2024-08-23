@@ -3,7 +3,7 @@
 interface Window {
   // expose in the `electron/preload/index.ts`
   ipcRenderer: import("electron").IpcRenderer;
-  psList: typeof import("ps-list").default;
+  psList: typeof import("@trufflesuite/ps-list").default;
   mouseClick: (
     actionType?: "singleClick" | "doubleClick",
     clickButton?: "left" | "right" | "middle"

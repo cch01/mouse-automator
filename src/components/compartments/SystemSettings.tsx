@@ -30,3 +30,6 @@ export const SystemSettings = memo(() => {
 	</FormContainer>
 
 })
+
+
+SystemSettings.displayName = 'SystemSettings'

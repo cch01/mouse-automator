@@ -37,3 +37,5 @@ export const OptionItem = memo<OptionItemProps>(({ title, onClick, highlighted }
 		<span className='my-auto text-primary'>{title}</span>
 	</div>
 })
+
+OptionItem.displayName = 'OptionItem'

@@ -29,7 +29,7 @@ export const MainActions = memo(() => {
 
 		if (!selectedProcesses.size && processSpecific) {
 			const errorMsg = 'Please select a process to start\nOr Click HERE to turn off application constrain.'
-			toast.error(errorMsg, {onClick:() => setProcessSpecific(false)})
+			toast.error(errorMsg, { onClick: () => setProcessSpecific(false) })
 			throw errorMsg
 		}
 
@@ -41,7 +41,7 @@ export const MainActions = memo(() => {
 
 		toast.success('Service Started')
 
-	}, [selectedProcesses.size, processSpecific, setStartedInterval, mouseOptions])
+	}, [selectedProcesses.size, processSpecific, setStartedInterval, mouseOptions.intervalSecond, mouseOptions.actionType, mouseOptions.clickButton, setProcessSpecific])
 
 	useEffect(() => {
 		if (!processSpecific) return
@@ -61,7 +61,7 @@ export const MainActions = memo(() => {
 				onStart()
 				showSystemNotification({ title: 'Service Started', body: 'Go and grab a coffee ☕' })
 			} catch (errMsg) {
-				showSystemNotification({ title: 'Failed', body: errMsg + '😢', onClick:() => setProcessSpecific(false) })
+				showSystemNotification({ title: 'Failed', body: errMsg + '😢', onClick: () => setProcessSpecific(false) })
 			}
 
 		})
@@ -70,7 +70,7 @@ export const MainActions = memo(() => {
 			showSystemNotification({ title: 'Service Stopped', body: 'Welcome back 😉' })
 		})
 
-	}, [onStop, onStart])
+	}, [onStop, onStart, setProcessSpecific])
 
 
 	return <div className='flex justify-between'>
@@ -82,3 +82,6 @@ export const MainActions = memo(() => {
 	</div>
 
 })
+
+
+MainActions.displayName = 'MainActions'

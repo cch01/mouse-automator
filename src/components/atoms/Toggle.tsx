@@ -58,3 +58,6 @@ export const Toggle = memo<ToggleProps>(({
     </label>
   )
 })
+
+
+Toggle.displayName = 'Toggle'
