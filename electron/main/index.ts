@@ -133,6 +133,8 @@ app.on("activate", () => {
 app.whenReady().then(() => {
   createWindow();
 
+  app.setAppUserModelId('Mouse Automator');
+
   const trayImg = nativeImage.createFromPath(
     path.join(process.env.VITE_PUBLIC!, "icon.png")
   );
