@@ -1,5 +1,11 @@
 import { ipcMain } from "electron/main";
-import robotJs from "@hurdlegroup/robotjs";
+import { Button, mouse } from "@nut-tree-fork/nut-js";
+
+const buttonMapper = {
+  left: Button.LEFT,
+  right: Button.RIGHT,
+  middle: Button.MIDDLE,
+};
 
 export const mouseClickHandler = (_ipcMain: typeof ipcMain) => {
   _ipcMain.handle(
@@ -9,8 +15,11 @@ export const mouseClickHandler = (_ipcMain: typeof ipcMain) => {
       actionType?: "singleClick" | "doubleClick",
       clickButton?: "left" | "right" | "middle"
     ) => {
-      const clickPattern = actionType === "doubleClick";
-      return robotJs.mouseClick(clickButton || "left", clickPattern);
+      if (actionType === "singleClick") {
+         mouse.click(buttonMapper[clickButton || "left"]);
+         return
+      }
+      mouse.doubleClick(buttonMapper[clickButton || "left"]);
     }
   );
 };
