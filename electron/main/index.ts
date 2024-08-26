@@ -3,6 +3,7 @@ import {
   BrowserWindow,
   ipcMain,
   Menu,
+  MenuItemConstructorOptions,
   nativeImage,
   Tray,
 } from "electron";
@@ -141,7 +142,7 @@ app.whenReady().then(() => {
 
   tray = new Tray(trayImg.resize({ width: 24, height: 24 }));
 
-  const contextMenu = Menu.buildFromTemplate([
+  const menuStructure = [
     {
       label: "Show App",
       click: () => win?.show(),
@@ -159,7 +160,9 @@ app.whenReady().then(() => {
       label: "Quit",
       click: () => app.exit(),
     },
-  ]);
+  ] as MenuItemConstructorOptions[]
+
+  const contextMenu = Menu.buildFromTemplate(menuStructure);
 
   tray.setToolTip("Mosue Automator");
   tray.setContextMenu(contextMenu);
@@ -174,5 +177,5 @@ app.whenReady().then(() => {
   toggleAutoStartHandler(ipcMain);
   exitBehaviorHandler(ipcMain, win!);
   exitHandler(ipcMain);
-  startAndStopEffectsHandler(ipcMain, win!, tray, contextMenu);
+  startAndStopEffectsHandler(ipcMain, win!, tray, menuStructure);
 });

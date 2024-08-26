@@ -1,12 +1,21 @@
 import { ipcMain } from "electron/main";
-import { app, BrowserWindow, Menu, nativeImage, Tray } from "electron";
+import {
+  app,
+  BrowserWindow,
+  Menu,
+  MenuItemConstructorOptions,
+  nativeImage,
+  Tray,
+} from "electron";
 import path from "node:path";
+import cloneDeep  from "lodash-es/cloneDeep";
+
 
 export const startAndStopEffectsHandler = (
   _ipcMain: typeof ipcMain,
   win: BrowserWindow,
   tray: Tray,
-  contextMenu: Menu
+  contextMenuStructure: MenuItemConstructorOptions[]
 ) => {
   const STOP_ICON = nativeImage.createFromPath(
     path.join(process.env.VITE_PUBLIC!, "icon.png")
@@ -33,13 +42,18 @@ export const startAndStopEffectsHandler = (
     win.setOverlayIcon(WORKING_OVERLAY_ICON, "Working");
     win.setTitle("Mouse Animator - Working");
 
-    const startBtnMenu = contextMenu.items.find(({label})=>label ==='Start')!
+    const menuStructureCp =cloneDeep(contextMenuStructure);
+
+    const startBtnMenu = menuStructureCp.find(
+      ({ label }) => label === "Start"
+    )!;
     startBtnMenu.enabled = false;
-    const stopBtn = startBtnMenu.menu.items.find(
-      ({ label }) => label === "Stop"
-    );
+
+    const stopBtn = menuStructureCp.find(({ label }) => label === "Stop");
+
     if (stopBtn) stopBtn.enabled = true;
 
+    tray.setContextMenu(Menu.buildFromTemplate(menuStructureCp));
   });
 
   _ipcMain.handle("stop-service-effects", async () => {
@@ -50,12 +64,17 @@ export const startAndStopEffectsHandler = (
     win.setTitle("Mouse Animator");
     win.setOverlayIcon(null, "");
 
-    const stopBtnMenu = contextMenu.items.find(({label})=>label ==='Stop')!
-    stopBtnMenu.enabled = false;
-    const startBtn = stopBtnMenu.menu.items.find(
-      ({ label }) => label === "Start"
-    );
-    if (startBtn) startBtn.enabled = true;
+    const menuStructureCp =cloneDeep(contextMenuStructure);
 
+    const startBtnMenu = menuStructureCp.find(
+      ({ label }) => label === "Start"
+    )!;
+    startBtnMenu.enabled = true;
+
+    const stopBtn = menuStructureCp.find(({ label }) => label === "Stop");
+
+    if (stopBtn) stopBtn.enabled = false;
+
+    tray.setContextMenu(Menu.buildFromTemplate(menuStructureCp));
   });
 };
