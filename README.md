@@ -8,7 +8,7 @@ Whether you're gaming, testing software, or handling repetitive tasks, Mouse Aut
 ### Platform
 Supports: **Mac🍎**, **Windows🪟**, **Linux🐧***
 
-**Linux version is not yet tested. Not all desktop environment support is expected. Voluntary testing & issues openings are welcomed* 😁
+**Linux version only tested on KDE desktop environment. Not all desktop environment support is expected. Voluntary testing & issues openings are welcomed* 😁
 
 ---
 
@@ -41,7 +41,7 @@ This application is built with:
 - **Preserve Settings**: Save and automatically reload your configurations.
 
 #### 3. ⚙️ General Settings
-- **🚀 Start on Login**: Run the application automatically when your system starts.
+- **🚀 Start on Login *(Windows Only)***: Run the application automatically when your system starts.
 - **🗂️ Close to Tray**: Minimize the application to the system tray for easy access.
 
 #### 4. 🕹️ Control Panel
