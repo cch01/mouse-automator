@@ -22,6 +22,9 @@
     "artifactName": "${productName}-Mac-${version}-Installer.${ext}",
     "icon": "./public/icon.icns"
   },
+  "portable": {
+    "artifactName": "mouseAutomator_portable_${version}.exe"
+  },
   "win": {
     "target": [
       {
@@ -29,6 +32,9 @@
         "arch": [
           "x64"
         ]
+      },
+      {
+        "target": "portable"
       }
     ],
     "artifactName": "${productName}-Windows-${version}-Setup.${ext}",
